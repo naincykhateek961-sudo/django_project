@@ -1,0 +1,163 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5" height="500px">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h3>Add Employee</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Name -->
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input
+                        type="text"
+                        name="nm"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input
+                        type="email"
+                        name="em"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <!-- Age -->
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input
+                        type="number"
+                        name="ag"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <!-- Salary -->
+                <div class="mb-3">
+                    <label class="form-label">Salary</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="sal"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <!-- Department -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Department
+                    </label>
+
+                    <select
+                        name="dep"
+                        class="form-select"
+                        required
+                    >
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        {% for i in dep_data %}
+
+                        <option value="{{ i.id }}">
+                            {{ i.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Company -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Company
+                    </label>
+
+                    {% for i in com_data %}
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="comp"
+                            value="{{ i.id }}"
+                            required
+                        >
+
+                        <label class="form-check-label">
+                            {{ i.name }}
+                        </label>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <!-- Address -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Address
+                    </label>
+
+                    <textarea
+                        name="add"
+                        class="form-control"
+                        rows="3"
+                        required
+                    ></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Add Employee
+                </button>
+
+                <a
+                    href="{% url 'empdata' %}"
+                    class="btn btn-secondary"
+                >
+                    Back
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
